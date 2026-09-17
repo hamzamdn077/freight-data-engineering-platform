@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ForEach1",
+				"name": "Weather per City",
 				"type": "ForEach",
 				"dependsOn": [],
 				"userProperties": [],
