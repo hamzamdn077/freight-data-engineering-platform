@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfhamza"
 		},
+		"AzureBlobStorage1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage1'"
+		},
 		"AzureDataLakeStorage1_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
@@ -18,6 +22,10 @@
 		"HttpServer1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/"
+		},
+		"wheaterAPI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://archive-api.open-meteo.com/"
 		}
 	},
 	"variables": {
@@ -310,6 +318,147 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/weather_pipeline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.cities",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "JsonSource",
+											"storeSettings": {
+												"type": "HttpReadSettings",
+												"requestMethod": "GET"
+											},
+											"formatSettings": {
+												"type": "JsonReadSettings"
+											}
+										},
+										"sink": {
+											"type": "JsonSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "JsonWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "get_weather",
+											"type": "DatasetReference",
+											"parameters": {
+												"RelativeUrl": {
+													"value": "@concat('v1/archive?latitude=', item().lat, '&longitude=', item().lon, '&start_date=2026-03-01&end_date=2026-09-15&daily=precipitation_sum,wind_speed_10m_max,weather_code&timezone=UTC')\r\n",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "load_weather",
+											"type": "DatasetReference",
+											"parameters": {
+												"City": {
+													"value": "@item().city",
+													"type": "Expression"
+												},
+												"FileName": {
+													"value": "@concat('weather_2026_', item().city, '.json')",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"cities": {
+						"type": "array",
+						"defaultValue": [
+							{
+								"city": "Tanger_Med",
+								"lat": 35.89,
+								"lon": -5.5
+							},
+							{
+								"city": "Casablanca",
+								"lat": 33.57,
+								"lon": -7.59
+							},
+							{
+								"city": "Agadir",
+								"lat": 30.42,
+								"lon": -9.6
+							},
+							{
+								"city": "Shanghai",
+								"lat": 31.23,
+								"lon": 121.47
+							},
+							{
+								"city": "Shenzhen",
+								"lat": 22.54,
+								"lon": 114.06
+							},
+							{
+								"city": "Singapore",
+								"lat": 1.35,
+								"lon": 103.82
+							},
+							{
+								"city": "Busan",
+								"lat": 35.1,
+								"lon": 129.04
+							},
+							{
+								"city": "Ningbo",
+								"lat": 29.87,
+								"lon": 121.54
+							}
+						]
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/get_weather')]",
+				"[concat(variables('factoryId'), '/datasets/load_weather')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Parquet_in')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -365,7 +514,38 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/parquet_br')]",
+			"name": "[concat(parameters('factoryName'), '/get_weather')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "wheaterAPI",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"RelativeUrl": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "HttpServerLocation",
+						"relativeUrl": {
+							"value": "@dataset().RelativeUrl",
+							"type": "Expression"
+						}
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/wheaterAPI')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/load_weather')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -373,23 +553,62 @@
 					"referenceName": "AzureDataLakeStorage1",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"City": {
+						"type": "string"
+					},
+					"FileName": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
-				"type": "Parquet",
+				"type": "Json",
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "shipments_data_@{pipeline().TriggerTime}.parquet",
+							"value": "@dataset().FileName",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat('weather/', dataset().City)",
 							"type": "Expression"
 						},
 						"fileSystem": "bronze"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/parquet_br')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": {
+							"value": "shipments_@{pipeline().TriggerTime}.parquet",
+							"type": "Expression"
+						},
+						"container": "bronze"
 					},
 					"compressionCodec": "snappy"
 				},
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]"
 			]
 		},
 		{
@@ -464,6 +683,19 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStorage1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -489,6 +721,21 @@
 				"type": "HttpServer",
 				"typeProperties": {
 					"url": "[parameters('HttpServer1_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/wheaterAPI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "HttpServer",
+				"typeProperties": {
+					"url": "[parameters('wheaterAPI_properties_typeProperties_url')]",
 					"enableServerCertificateValidation": true,
 					"authenticationType": "Anonymous"
 				}
@@ -547,8 +794,8 @@
 						"          dest_city as string,",
 						"          planned_eta as string,",
 						"          actual_eta as string,",
-						"          delay_hours as string,",
-						"          weight_kg as string,",
+						"          delay_hours as decimal(10,0),",
+						"          weight_kg as decimal(10,0),",
 						"          commodity as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
@@ -561,12 +808,11 @@
 						"filter1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     format: 'parquet',",
-						"     umask: 0022,",
-						"     preCommands: [],",
-						"     postCommands: [],",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     saveOrder: 1) ~> sink1",
+						"     saveOrder: 1,",
+						"     preCommands: [],",
+						"     postCommands: []) ~> sink1",
 						"aggregate1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     partitionFileNames:['watermark.json'],",

@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adfhamza"
 		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
@@ -13,6 +16,9 @@
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/"
+		},
+		"wheaterAPI_properties_typeProperties_url": {
+			"value": "https://archive-api.open-meteo.com/"
 		},
 		"containerUri": {
 			"value": ""
