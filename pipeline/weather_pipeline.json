@@ -1,0 +1,132 @@
+{
+	"name": "weather_pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.cities",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "get_weather",
+									"type": "DatasetReference",
+									"parameters": {
+										"RelativeUrl": {
+											"value": "@concat('v1/archive?latitude=', item().lat, '&longitude=', item().lon, '&start_date=2026-03-01&end_date=2026-09-15&daily=precipitation_sum,wind_speed_10m_max,weather_code&timezone=UTC')\r\n",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "load_weather",
+									"type": "DatasetReference",
+									"parameters": {
+										"City": {
+											"value": "@item().city",
+											"type": "Expression"
+										},
+										"FileName": {
+											"value": "@concat('weather_2026_', item().city, '.json')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"cities": {
+				"type": "array",
+				"defaultValue": [
+					{
+						"city": "Tanger_Med",
+						"lat": 35.89,
+						"lon": -5.5
+					},
+					{
+						"city": "Casablanca",
+						"lat": 33.57,
+						"lon": -7.59
+					},
+					{
+						"city": "Agadir",
+						"lat": 30.42,
+						"lon": -9.6
+					},
+					{
+						"city": "Shanghai",
+						"lat": 31.23,
+						"lon": 121.47
+					},
+					{
+						"city": "Shenzhen",
+						"lat": 22.54,
+						"lon": 114.06
+					},
+					{
+						"city": "Singapore",
+						"lat": 1.35,
+						"lon": 103.82
+					},
+					{
+						"city": "Busan",
+						"lat": 35.1,
+						"lon": 129.04
+					},
+					{
+						"city": "Ningbo",
+						"lat": 29.87,
+						"lon": 121.54
+					}
+				]
+			}
+		},
+		"annotations": []
+	}
+}

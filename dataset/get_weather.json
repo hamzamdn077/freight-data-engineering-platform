@@ -1,0 +1,26 @@
+{
+	"name": "get_weather",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "wheaterAPI",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"RelativeUrl": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().RelativeUrl",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	}
+}
