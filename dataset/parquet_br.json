@@ -1,5 +1,5 @@
 {
-	"name": "Parquet_in",
+	"name": "parquet_br",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
@@ -11,10 +11,10 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "shipments_@{pipeline().TriggerTime}.parquet",
+					"value": "shipments_data_@{pipeline().TriggerTime}.parquet",
 					"type": "Expression"
 				},
-				"fileSystem": "landing"
+				"fileSystem": "bronze"
 			},
 			"compressionCodec": "snappy"
 		},

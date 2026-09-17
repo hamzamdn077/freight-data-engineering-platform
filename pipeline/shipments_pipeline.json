@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "shipments_pipeline",
 	"properties": {
 		"activities": [
 			{
@@ -84,6 +84,18 @@
 						"mappings": [
 							{
 								"source": {
+									"name": "transaction_date",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "transaction_date",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
 									"name": "shipment_id",
 									"type": "String",
 									"physicalType": "String"
@@ -91,7 +103,7 @@
 								"sink": {
 									"name": "shipment_id",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
@@ -103,7 +115,7 @@
 								"sink": {
 									"name": "carrier",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
@@ -115,7 +127,7 @@
 								"sink": {
 									"name": "origin_city",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
@@ -127,55 +139,55 @@
 								"sink": {
 									"name": "dest_city",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
 									"name": "planned_eta",
-									"type": "DateTime",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "planned_eta",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
 									"name": "actual_eta",
-									"type": "DateTime",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "actual_eta",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
 									"name": "delay_hours",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "delay_hours",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
 									"name": "weight_kg",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
 									"name": "weight_kg",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							},
 							{
@@ -187,7 +199,7 @@
 								"sink": {
 									"name": "commodity",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "UTF8"
 								}
 							}
 						],

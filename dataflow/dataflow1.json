@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Parquet_in",
+						"referenceName": "parquet_br",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -41,21 +41,22 @@
 				"     last_load as string",
 				"}",
 				"source(output(",
+				"          transaction_date as string,",
 				"          shipment_id as string,",
 				"          carrier as string,",
 				"          origin_city as string,",
 				"          dest_city as string,",
 				"          planned_eta as string,",
 				"          actual_eta as string,",
-				"          delay_hours as decimal(38,18),",
-				"          weight_kg as decimal(38,18),",
+				"          delay_hours as string,",
+				"          weight_kg as string,",
 				"          commodity as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: true,",
 				"     format: 'parquet',",
-				"     wildcardPaths:['data_*.parquet']) ~> source1",
+				"     wildcardPaths:['shipments_*.parquet']) ~> source1",
 				"source1 filter(toDate(left(transaction_date, 10)) > toDate(left($last_load, 10))) ~> filter1",
 				"filter1 aggregate(actual_eta = max(actual_eta)) ~> aggregate1",
 				"filter1 sink(allowSchemaDrift: true,",
