@@ -23,11 +23,13 @@ for _ in range(5000):
     datetime_start=datetime(2026, 3, 1),
     datetime_end=datetime(2026, 9, 15)
 )
+    transaction_date=planned_eta-timedelta(days=random.randint(5,30))
     reliability =CARRIER_RELIABILITY[carrier]
     delayed     =random.random() > reliability
     delay_hours =round(random.uniform(12, 120),1) if delayed else 0
     actual_eta  =planned_eta + timedelta(hours=delay_hours)
     records.append({
+        'transaction_date': transaction_date.isoformat(),
         'shipment_id':  str(uuid.uuid4()),
         'carrier':      carrier,
         'origin_city':  origin,
