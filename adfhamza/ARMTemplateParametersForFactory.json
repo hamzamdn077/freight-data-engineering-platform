@@ -11,8 +11,14 @@
 		"AzureDataLakeStorage1_accountKey": {
 			"value": ""
 		},
+		"AzureDatabricks1_accessToken": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://freightstorageacc.dfs.core.windows.net/"
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "c78e0a40-5e4c-318b-9815-f3658572a8f9"
 		},
 		"HttpServer1_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/"
