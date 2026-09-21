@@ -1,0 +1,511 @@
+{
+  "fuel_prices": {
+    "success": true,
+    "data": {
+      "timestamp": "2026-09-21T21:13:11+00:00",
+      "source": "EIA (U.S. Energy Information Administration)",
+      "currency": "USD",
+      "unit": "gallon",
+      "data": {
+        "diesel": {
+          "national_average": 6.285,
+          "change_week": 0.318,
+          "change_percent": 5.33,
+          "updated_at": "2026-09-14",
+          "regions": {
+            "east_coast": 6.158,
+            "midwest": 6.25,
+            "gulf_coast": 6.027,
+            "rocky_mountain": 6.066,
+            "west_coast": 7.25,
+            "california": 8.039
+          }
+        },
+        "gasoline": {
+          "national_average": 4.319,
+          "change_week": 0.162,
+          "change_percent": 3.9,
+          "updated_at": "2026-09-14",
+          "grades": {
+            "regular": 4.319,
+            "midgrade": 4.925,
+            "premium": 5.316
+          }
+        },
+        "bunker_fuel": {
+          "available": false,
+          "note": "No known free source (Rotterdam/Singapore/Houston) \u2014 requires a paid provider (e.g. Ship & Bunker, Argus)."
+        }
+      },
+      "historical": {
+        "diesel_30d_avg": 5.876,
+        "diesel_90d_avg": 5.299,
+        "diesel_yoy_change": 67.6,
+        "gasoline_30d_avg": 4.158,
+        "gasoline_90d_avg": 4.018,
+        "gasoline_yoy_change": 36.1
+      }
+    },
+    "meta": {
+      "request_id": "f66b5272-2433-4ac6-841a-75d3cac44ecb"
+    }
+  },
+  "port_congestion": [
+    {
+      "port": "Shanghai",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Shanghai",
+              "locode": "CN SGH",
+              "country": "China",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 75.3,
+                "baseline_avg_portcalls_per_day": 83.1,
+                "ratio_vs_baseline": 0.91
+              }
+            },
+            {
+              "port": "Shanghai (Yangshan)",
+              "locode": null,
+              "country": "China",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 12,
+                "baseline_avg_portcalls_per_day": 11.3,
+                "ratio_vs_baseline": 1.06
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 2,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "07a15cf4-a730-43af-af7d-6765049c6af9"
+        }
+      }
+    },
+    {
+      "port": "Rotterdam",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Rotterdam",
+              "locode": "NL RTM",
+              "country": "The Netherlands",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 83.9,
+                "baseline_avg_portcalls_per_day": 83.9,
+                "ratio_vs_baseline": 1
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "7401e803-71f1-4a6c-a52d-5182448c7ab2"
+        }
+      }
+    },
+    {
+      "port": "Hamburg",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Hamburg",
+              "locode": "DE HAM",
+              "country": "Germany",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 18.4,
+                "baseline_avg_portcalls_per_day": 16.5,
+                "ratio_vs_baseline": 1.12
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "d591c9b7-4a89-45c9-adeb-7057f340749a"
+        }
+      }
+    },
+    {
+      "port": "Felixstowe",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Felixstowe",
+              "locode": "GB FXT",
+              "country": "United Kingdom",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 3.4,
+                "baseline_avg_portcalls_per_day": 3.3,
+                "ratio_vs_baseline": 1.05
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "88f43e05-c5a0-407e-94b6-de9f3875ac55"
+        }
+      }
+    },
+    {
+      "port": "Los Angeles",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Los Angeles-Long Beach",
+              "locode": "US LAX",
+              "country": "United States",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 10.1,
+                "baseline_avg_portcalls_per_day": 10.5,
+                "ratio_vs_baseline": 0.97
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "ea9dfad2-edd0-4775-9f4e-1598370ac420"
+        }
+      }
+    },
+    {
+      "port": "New York",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "New York-New Jersey",
+              "locode": null,
+              "country": "United States",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 10.1,
+                "baseline_avg_portcalls_per_day": 10.1,
+                "ratio_vs_baseline": 1.01
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "770f715a-c825-4ff6-8aa6-bfcf425dec56"
+        }
+      }
+    },
+    {
+      "port": "Singapore",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Singapore",
+              "locode": "SG SIN",
+              "country": "Singapore",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 125,
+                "baseline_avg_portcalls_per_day": 119.6,
+                "ratio_vs_baseline": 1.04
+              }
+            },
+            {
+              "port": "Singapore - Offshore Oil Terminal 1",
+              "locode": null,
+              "country": "Singapore",
+              "congestion": "low",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 5.7,
+                "baseline_avg_portcalls_per_day": 7.7,
+                "ratio_vs_baseline": 0.74
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 1
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "7315f140-b0b6-442f-89bb-8a31d6a35dc3"
+        }
+      }
+    },
+    {
+      "port": "Busan",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Busan",
+              "locode": "KR PUS",
+              "country": "Korea",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 46.4,
+                "baseline_avg_portcalls_per_day": 49.3,
+                "ratio_vs_baseline": 0.94
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "323c97c0-390e-462c-b39f-3516cf803225"
+        }
+      }
+    },
+    {
+      "port": "Casablanca",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Casablanca",
+              "locode": "MA CAS",
+              "country": "Morocco",
+              "congestion": "moderate",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 6.1,
+                "baseline_avg_portcalls_per_day": 6,
+                "ratio_vs_baseline": 1.02
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 1,
+            "ports_low": 0
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "5f4828e6-1d04-4058-aa80-a2ad33a7b72d"
+        }
+      }
+    },
+    {
+      "port": "Agadir",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [
+            {
+              "port": "Agadir",
+              "locode": "MA AGA",
+              "country": "Morocco",
+              "congestion": "low",
+              "as_of": "2026-09-11",
+              "metrics": {
+                "recent_avg_portcalls_per_day": 1.3,
+                "baseline_avg_portcalls_per_day": 1.8,
+                "ratio_vs_baseline": 0.73
+              }
+            }
+          ],
+          "global_summary": {
+            "ports_high_congestion": 0,
+            "ports_moderate": 0,
+            "ports_low": 1
+          },
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "66f1314a-5ba8-4c19-8a13-a93e6dc7e0f4"
+        }
+      }
+    },
+    {
+      "port": "Tanger Med",
+      "data": {
+        "success": true,
+        "data": {
+          "results": [],
+          "meta": {
+            "source": "IMF PortWatch (portwatch.imf.org) - UN Global Platform AIS data",
+            "data_lag_days": "~6-7 (daily updates, not real-time)",
+            "methodology": "congestion level is an approximation: last 7 days' avg port calls vs 90-day baseline for the same port. Does not measure vessel wait/anchorage time."
+          }
+        },
+        "meta": {
+          "request_id": "c1316534-e8ad-4399-bc7e-1718be766b8d"
+        }
+      }
+    }
+  ],
+  "fbx_route_rates": [
+    {
+      "origin": "Shanghai",
+      "dest": "Rotterdam",
+      "rate_usd_per_teu": 2779,
+      "index": "FBX11",
+      "container": "40HC"
+    },
+    {
+      "origin": "Shenzhen",
+      "dest": "Hamburg",
+      "rate_usd_per_teu": 2779,
+      "index": "FBX11",
+      "container": "40HC"
+    },
+    {
+      "origin": "Singapore",
+      "dest": "Felixstowe",
+      "rate_usd_per_teu": 2779,
+      "index": "FBX11",
+      "container": "40HC"
+    },
+    {
+      "origin": "Busan",
+      "dest": "Los Angeles",
+      "rate_usd_per_teu": 2418,
+      "index": "FBX01",
+      "container": "40HC"
+    },
+    {
+      "origin": "Ningbo",
+      "dest": "New York",
+      "rate_usd_per_teu": 3859,
+      "index": "FBX03",
+      "container": "40HC"
+    },
+    {
+      "origin": "Tanger Med",
+      "dest": "Rotterdam",
+      "rate_usd_per_teu": 446,
+      "index": "FBX21",
+      "container": "40HC"
+    },
+    {
+      "origin": "Tanger Med",
+      "dest": "Barcelona",
+      "rate_usd_per_teu": 446,
+      "index": "FBX21",
+      "container": "40HC"
+    },
+    {
+      "origin": "Casablanca",
+      "dest": "Marseille",
+      "rate_usd_per_teu": 446,
+      "index": "FBX21",
+      "container": "40HC"
+    },
+    {
+      "origin": "Agadir",
+      "dest": "Hamburg",
+      "rate_usd_per_teu": 1416,
+      "index": "FBX22",
+      "container": "40HC"
+    }
+  ]
+}
